@@ -19,63 +19,27 @@ function formatTelegramMessage(data: LeadData): string {
     ? `Другое: ${data.blogGoalOther}`
     : data.blogGoal
 
-  const lines = [
-    '📋 *НОВАЯ ЗАЯВКА*',
-    '',
-    '━━━━━━━━━━━━━━━━━━━━',
-    '',
-    `👤 *Имя:* ${escapeMarkdown(data.name)}`,
-    `📱 *Контакт:* ${escapeMarkdown(data.contact)}`,
-    data.instagram ? `📸 *Instagram:* ${escapeMarkdown(data.instagram)}` : '',
-    '',
-    '━━━━━━━━━━━━━━━━━━━━',
-    '',
-    '🏢 *О бизнесе:*',
-    escapeMarkdown(data.business),
-    '',
-    '━━━━━━━━━━━━━━━━━━━━',
-    '',
-    `🎯 *Цель блога:* ${escapeMarkdown(blogGoalText)}`,
-    '',
-    '📝 *Предыдущий опыт с блогом:*',
-    escapeMarkdown(data.previousExperience),
-    '',
-    '━━━━━━━━━━━━━━━━━━━━',
-    '',
-    `💰 *Бюджет на блог:* ${escapeMarkdown(data.blogBudget)}`,
-    `📊 *Бюджет на маркетинг:* ${escapeMarkdown(data.marketingBudget)}`,
-    '',
-    `⏱ *Готов работать 3+ месяцев:* ${data.threeMonths === 'да' ? 'Да ✅' : 'Нет ❌'}`,
-    '',
-    '━━━━━━━━━━━━━━━━━━━━',
-    '',
-    '🎯 *Ожидаемый результат через 3 месяца:*',
-    escapeMarkdown(data.successMetric),
-  ]
+  return `📋 НОВАЯ ЗАЯВКА
 
-  return lines.filter(line => line !== '').join('\n')
-}
+👤 Имя: ${data.name}
+📱 Контакт: ${data.contact}
+${data.instagram ? `📸 Instagram: ${data.instagram}` : ''}
 
-function escapeMarkdown(text: string): string {
-  return text
-    .replace(/_/g, '\\_')
-    .replace(/\*/g, '\\*')
-    .replace(/\[/g, '\\[')
-    .replace(/\]/g, '\\]')
-    .replace(/\(/g, '\\(')
-    .replace(/\)/g, '\\)')
-    .replace(/~/g, '\\~')
-    .replace(/`/g, '\\`')
-    .replace(/>/g, '\\>')
-    .replace(/#/g, '\\#')
-    .replace(/\+/g, '\\+')
-    .replace(/-/g, '\\-')
-    .replace(/=/g, '\\=')
-    .replace(/\|/g, '\\|')
-    .replace(/\{/g, '\\{')
-    .replace(/\}/g, '\\}')
-    .replace(/\./g, '\\.')
-    .replace(/!/g, '\\!')
+🏢 О бизнесе:
+${data.business}
+
+🎯 Цель блога: ${blogGoalText}
+
+📝 Предыдущий опыт:
+${data.previousExperience}
+
+💰 Бюджет на блог: ${data.blogBudget}
+📊 Бюджет на маркетинг: ${data.marketingBudget}
+
+⏱ Готов работать 3+ месяцев: ${data.threeMonths === 'да' ? 'Да' : 'Нет'}
+
+🎯 Ожидаемый результат:
+${data.successMetric}`
 }
 
 async function sendToTelegram(message: string): Promise<boolean> {
@@ -98,7 +62,6 @@ async function sendToTelegram(message: string): Promise<boolean> {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'MarkdownV2',
         }),
       }
     )

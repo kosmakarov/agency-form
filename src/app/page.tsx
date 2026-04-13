@@ -9,11 +9,9 @@ interface FormData {
   instagram: string
   business: string
   blogGoal: string
-  blogGoalOther: string
   previousExperience: string
   blogBudget: string
   marketingBudget: string
-  threeMonths: string
   successMetric: string
 }
 
@@ -32,11 +30,9 @@ export default function Home() {
     instagram: '',
     business: '',
     blogGoal: '',
-    blogGoalOther: '',
     previousExperience: '',
     blogBudget: '',
     marketingBudget: '',
-    threeMonths: '',
     successMetric: '',
   })
 
@@ -61,10 +57,6 @@ export default function Home() {
       newErrors.blogGoal = 'Пожалуйста, выберите цель'
     }
 
-    if (formData.blogGoal === 'другое' && !formData.blogGoalOther.trim()) {
-      newErrors.blogGoalOther = 'Пожалуйста, укажите вашу цель'
-    }
-
     if (!formData.previousExperience.trim()) {
       newErrors.previousExperience = 'Пожалуйста, ответьте на вопрос'
     }
@@ -75,10 +67,6 @@ export default function Home() {
 
     if (!formData.marketingBudget) {
       newErrors.marketingBudget = 'Пожалуйста, выберите бюджет'
-    }
-
-    if (!formData.threeMonths) {
-      newErrors.threeMonths = 'Пожалуйста, ответьте на вопрос'
     }
 
     if (!formData.successMetric.trim()) {
@@ -139,6 +127,7 @@ export default function Home() {
 
   const labelClassName = "block text-forest-800 font-medium mb-2"
   const errorClassName = "text-red-500 text-sm mt-1"
+  const hintClassName = "text-forest-500 text-sm mt-1"
 
   return (
     <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -146,11 +135,10 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-semibold text-ivory-100 mb-6">
-            Анкета предзаписи
+            Расскажите про свой бизнес
           </h1>
           <p className="text-forest-300 text-lg leading-relaxed max-w-xl mx-auto">
-            Мы работаем с ограниченным числом проектов и рассматриваем анкеты вручную.
-            Анкета нужна, чтобы понять, может&nbsp;ли блог стать рабочим каналом роста именно для вашего бизнеса. Это займёт 2&nbsp;минуты.
+            Заполните за 2 минуты — я пойму контекст и предложу подходящий формат работы.
           </p>
         </div>
 
@@ -177,7 +165,7 @@ export default function Home() {
             {/* 2. Контакт */}
             <div>
               <label htmlFor="contact" className={labelClassName}>
-                Контакт для связи (Telegram / WhatsApp / телефон) <span className="text-red-400">*</span>
+                Контакт для связи <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -187,13 +175,14 @@ export default function Home() {
                 className={inputClassName('contact')}
                 placeholder="@username или +7..."
               />
+              <p className={hintClassName}>Telegram, WhatsApp или телефон</p>
               {errors.contact && <p className={errorClassName}>{errors.contact}</p>}
             </div>
 
             {/* 3. Instagram */}
             <div>
               <label htmlFor="instagram" className={labelClassName}>
-                Ник в Инстаграм
+                Ник в Instagram
               </label>
               <input
                 type="text"
@@ -208,31 +197,31 @@ export default function Home() {
             {/* 4. О бизнесе */}
             <div>
               <label htmlFor="business" className={labelClassName}>
-                Коротко расскажите про ваш бизнес <span className="text-red-400">*</span>
+                Коротко про бизнес <span className="text-red-400">*</span>
               </label>
               <textarea
                 id="business"
                 value={formData.business}
                 onChange={(e) => handleInputChange('business', e.target.value)}
                 className={inputClassName('business')}
-                placeholder="Чем занимаетесь, какой продукт или услуга"
+                placeholder="Расскажите в свободной форме"
                 rows={3}
               />
+              <p className={hintClassName}>Что делаете, для кого, какой примерно оборот</p>
               {errors.business && <p className={errorClassName}>{errors.business}</p>}
             </div>
 
             {/* 5. Цель блога */}
             <div>
               <label className={labelClassName}>
-                Зачем вам блог как инструмент для бизнеса? <span className="text-red-400">*</span>
+                Зачем вам блог? <span className="text-red-400">*</span>
               </label>
               <div className="space-y-3 mt-3">
                 {[
-                  { value: 'клиенты', label: 'Клиенты / заявки' },
-                  { value: 'продажи', label: 'Продажи продукта / подписки' },
-                  { value: 'партнёры', label: 'Партнёры / деловые контакты' },
-                  { value: 'инвестиции', label: 'Инвестиционный интерес' },
-                  { value: 'другое', label: 'Другое' },
+                  { value: 'клиенты', label: 'Клиенты и заявки' },
+                  { value: 'узнаваемость', label: 'Узнаваемость и доверие к бренду' },
+                  { value: 'партнёры', label: 'Партнёры и деловые контакты' },
+                  { value: 'не понимаю', label: 'Пока не понимаю, но чувствую что надо' },
                 ].map((option) => (
                   <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
                     <input
@@ -248,46 +237,37 @@ export default function Home() {
                   </label>
                 ))}
               </div>
-              {formData.blogGoal === 'другое' && (
-                <input
-                  type="text"
-                  value={formData.blogGoalOther}
-                  onChange={(e) => handleInputChange('blogGoalOther', e.target.value)}
-                  className={`${inputClassName('blogGoalOther')} mt-3`}
-                  placeholder="Укажите вашу цель"
-                />
-              )}
               {errors.blogGoal && <p className={errorClassName}>{errors.blogGoal}</p>}
-              {errors.blogGoalOther && <p className={errorClassName}>{errors.blogGoalOther}</p>}
             </div>
 
             {/* 6. Предыдущий опыт */}
             <div>
               <label htmlFor="previousExperience" className={labelClassName}>
-                Пробовали ли вы раньше развивать блог или соцсети? Почему не дало результата? <span className="text-red-400">*</span>
+                Пробовали вести блог раньше? Что не получилось? <span className="text-red-400">*</span>
               </label>
               <textarea
                 id="previousExperience"
                 value={formData.previousExperience}
                 onChange={(e) => handleInputChange('previousExperience', e.target.value)}
                 className={inputClassName('previousExperience')}
-                placeholder="1–2 предложения"
+                placeholder="Расскажите о вашем опыте"
                 rows={2}
               />
+              <p className={hintClassName}>Если не пробовали — так и напишите</p>
               {errors.previousExperience && <p className={errorClassName}>{errors.previousExperience}</p>}
             </div>
 
             {/* 7. Бюджет на блог */}
             <div>
               <label className={labelClassName}>
-                Сколько вы готовы инвестировать в месяц на развитие блога как канала привлечения? <span className="text-red-400">*</span>
+                Сколько готовы инвестировать в развитие блога в месяц? <span className="text-red-400">*</span>
               </label>
               <div className="space-y-3 mt-3">
                 {[
-                  { value: 'до 50 тыс', label: 'До 50 тыс \u20bd в месяц' },
-                  { value: '50-150 тыс', label: '50–150 тыс \u20bd' },
-                  { value: '150-300 тыс', label: '150–300 тыс \u20bd' },
-                  { value: '300+ тыс', label: '300 тыс \u20bd и выше' },
+                  { value: 'до 50 тыс', label: 'До 50 тыс ₽' },
+                  { value: '50-150 тыс', label: '50–150 тыс ₽' },
+                  { value: '150-300 тыс', label: '150–300 тыс ₽' },
+                  { value: '300+ тыс', label: '300 тыс ₽ и выше' },
                   { value: 'не определился', label: 'Пока не определился' },
                 ].map((option) => (
                   <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
@@ -310,13 +290,14 @@ export default function Home() {
             {/* 8. Бюджет на маркетинг */}
             <div>
               <label className={labelClassName}>
-                Какой у вас сейчас месячный бюджет на маркетинг в целом? <span className="text-red-400">*</span>
+                Какой у вашей компании месячный бюджет на маркетинг в целом? <span className="text-red-400">*</span>
               </label>
               <div className="space-y-3 mt-3">
                 {[
-                  { value: 'до 100 тыс', label: 'До 100 тыс \u20bd' },
-                  { value: '100-500 тыс', label: '100–500 тыс \u20bd' },
-                  { value: '500+ тыс', label: '500 тыс \u20bd и выше' },
+                  { value: 'до 100 тыс', label: 'До 100 тыс ₽' },
+                  { value: '100-300 тыс', label: '100–300 тыс ₽' },
+                  { value: '300-999 тыс', label: '300–999 тыс ₽' },
+                  { value: '1 млн+', label: '1 млн ₽ и выше' },
                   { value: 'нет бюджета', label: 'Пока нет регулярного бюджета' },
                 ].map((option) => (
                   <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
@@ -336,37 +317,10 @@ export default function Home() {
               {errors.marketingBudget && <p className={errorClassName}>{errors.marketingBudget}</p>}
             </div>
 
-            {/* 9. Три месяца */}
-            <div>
-              <label className={labelClassName}>
-                Готовы ли вы рассматривать работу горизонтом от 3 месяцев? <span className="text-red-400">*</span>
-              </label>
-              <div className="space-y-3 mt-3">
-                {[
-                  { value: 'да', label: 'Да' },
-                  { value: 'нет', label: 'Нет / хочу попробовать быстрее' },
-                ].map((option) => (
-                  <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="threeMonths"
-                      value={option.value}
-                      checked={formData.threeMonths === option.value}
-                      onChange={(e) => handleInputChange('threeMonths', e.target.value)}
-                    />
-                    <span className="text-forest-800 group-hover:text-forest-600 transition-colors">
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-              {errors.threeMonths && <p className={errorClassName}>{errors.threeMonths}</p>}
-            </div>
-
-            {/* 10. Метрика успеха */}
+            {/* 9. Метрика успеха */}
             <div>
               <label htmlFor="successMetric" className={labelClassName}>
-                Какой результат через 3 месяца будет для вас показателем, что блог движется в правильную сторону для бизнеса? <span className="text-red-400">*</span>
+                Какой результат через 3 месяца покажет вам, что блог работает? <span className="text-red-400">*</span>
               </label>
               <textarea
                 id="successMetric"
@@ -421,16 +375,11 @@ export default function Home() {
                   Отправляем...
                 </span>
               ) : (
-                'Отправить анкету'
+                'Отправить'
               )}
             </button>
           </form>
         </div>
-
-        {/* Footer */}
-        <p className="text-center text-forest-500 text-sm mt-8">
-          Мы ценим ваше время и конфиденциальность
-        </p>
       </div>
     </main>
   )

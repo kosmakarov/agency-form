@@ -29,7 +29,7 @@ export default function ThanksPage() {
         </h1>
 
         <p className="text-forest-300 text-lg leading-relaxed mb-10">
-          Мы рассмотрим заявку и вернёмся к вам лично.
+          Посмотрю анкету и напишу вам в течение дня.
         </p>
 
         {/* Back link */}

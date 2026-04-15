@@ -33,6 +33,7 @@ export default function ConsultPage() {
       if (data.confirmationUrl) {
         window.location.href = data.confirmationUrl
       } else {
+        console.error('Payment error:', data)
         setError(data.error || 'Ошибка создания платежа')
         setIsLoading(false)
       }

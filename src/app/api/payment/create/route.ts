@@ -5,12 +5,20 @@ const YOOKASSA_SECRET_KEY = process.env.YOOKASSA_SECRET_KEY
 
 export async function POST(request: Request) {
   try {
+    // Check credentials
+    if (!YOOKASSA_SHOP_ID || !YOOKASSA_SECRET_KEY) {
+      console.error('Missing YooKassa credentials')
+      return NextResponse.json({ error: 'Платёжная система не настроена' }, { status: 500 })
+    }
+
     const body = await request.json()
     const { email, name } = body
 
     if (!email) {
       return NextResponse.json({ error: 'Email обязателен для чека' }, { status: 400 })
     }
+
+    console.log('Creating payment for:', email)
 
     // Generate idempotence key
     const idempotenceKey = crypto.randomUUID()
@@ -62,8 +70,9 @@ export async function POST(request: Request) {
     const data = await response.json()
 
     if (!response.ok) {
-      console.error('YooKassa error:', data)
-      return NextResponse.json({ error: 'Ошибка создания платежа' }, { status: 500 })
+      console.error('YooKassa error:', JSON.stringify(data, null, 2))
+      const errorMessage = data.description || data.message || 'Ошибка создания платежа'
+      return NextResponse.json({ error: errorMessage, details: data }, { status: 500 })
     }
 
     // Return confirmation URL for redirect

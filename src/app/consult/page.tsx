@@ -83,31 +83,25 @@ export default function ConsultPage() {
         {/* 4. Testimonial Section */}
         <section className="mb-16">
           <p className="text-cream-muted text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
-          <div className="space-y-3 max-w-sm mx-auto">
-            <div className="rounded-2xl overflow-hidden bg-[#E7FED6] p-1">
-              <video
-                className="w-full h-auto rounded-xl"
-                controls
-                preload="auto"
-                playsInline
-                style={{ maxHeight: '120px' }}
-              >
-                <source src="/review-1.mov" type="video/quicktime" />
-                <source src="/review-1.mov" type="video/mp4" />
-              </video>
-            </div>
-            <div className="rounded-2xl overflow-hidden bg-[#E7FED6] p-1">
-              <video
-                className="w-full h-auto rounded-xl"
-                controls
-                preload="auto"
-                playsInline
-                style={{ maxHeight: '120px' }}
-              >
-                <source src="/review-2.mov" type="video/quicktime" />
-                <source src="/review-2.mov" type="video/mp4" />
-              </video>
-            </div>
+          <div className="space-y-3 max-w-xs mx-auto">
+            <video
+              className="w-full rounded-2xl"
+              controls
+              preload="metadata"
+              playsInline
+              poster="/review-1-poster.jpg"
+            >
+              <source src="/review-1.mp4" type="video/mp4" />
+            </video>
+            <video
+              className="w-full rounded-2xl"
+              controls
+              preload="metadata"
+              playsInline
+              poster="/review-2-poster.jpg"
+            >
+              <source src="/review-2.mp4" type="video/mp4" />
+            </video>
           </div>
         </section>
 

@@ -164,7 +164,6 @@ export default function ConsultPage() {
         <div className="max-w-4xl mx-auto px-5 py-10">
           <div className="flex flex-col sm:flex-row sm:justify-between gap-8">
             <div className="text-cream-muted text-sm space-y-1">
-              <p className="text-cream font-medium mb-3">КОСТЯ</p>
               <p>ИП Макаров Константин Александрович</p>
               <p>ОГРНИП 319631300129246</p>
               <p>ИНН 633012547575</p>

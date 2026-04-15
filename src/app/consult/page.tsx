@@ -82,17 +82,31 @@ export default function ConsultPage() {
 
         {/* 4. Testimonial Section */}
         <section className="mb-16">
-          <blockquote className="relative">
-            <div className="text-gold/30 text-6xl font-georgia absolute -top-4 -left-2">"</div>
-            <p className="text-cream/90 text-lg sm:text-xl leading-relaxed italic pl-8 pr-4">
-              Костя, ты так глубоко чувствуешь людей. Ты тёплый, чуткий. Таких экспертов я не знаю. Ты очень нужен рынку.
-            </p>
-            <footer className="mt-6 pl-8">
-              <cite className="not-italic text-cream-muted">
-                Арик, основатель VCV
-              </cite>
-            </footer>
-          </blockquote>
+          <p className="text-cream-muted text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
+          <div className="space-y-4">
+            <div className="rounded-xl overflow-hidden bg-dark-card">
+              <video
+                className="w-full"
+                controls
+                preload="metadata"
+                playsInline
+              >
+                <source src="/review-1.mov" type="video/quicktime" />
+                <source src="/review-1.mov" type="video/mp4" />
+              </video>
+            </div>
+            <div className="rounded-xl overflow-hidden bg-dark-card">
+              <video
+                className="w-full"
+                controls
+                preload="metadata"
+                playsInline
+              >
+                <source src="/review-2.mov" type="video/quicktime" />
+                <source src="/review-2.mov" type="video/mp4" />
+              </video>
+            </div>
+          </div>
         </section>
 
         {/* 5. Price Section */}

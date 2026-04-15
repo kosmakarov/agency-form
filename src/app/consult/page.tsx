@@ -125,13 +125,37 @@ export default function ConsultPage() {
           </a>
         </section>
 
-        {/* 6. Footer */}
-        <footer className="text-center pt-12 border-t border-cream/10">
-          <p className="text-cream-muted text-sm">
-            Костя · Продюсирование блогов предпринимателей
-          </p>
-        </footer>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#0D0D14] border-t border-cream/5 mt-16 pb-24 sm:pb-8">
+        <div className="max-w-4xl mx-auto px-5 py-10">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-8">
+            {/* Left side - Legal info */}
+            <div className="text-cream-muted text-sm space-y-1">
+              <p className="text-cream font-medium mb-3">КОСТЯ</p>
+              <p>ИП Макаров Константин Александрович</p>
+              <p>ОГРНИП 324784700403025</p>
+              <p>ИНН 781430842498</p>
+            </div>
+
+            {/* Right side - Links */}
+            <div className="flex flex-col sm:items-end gap-4 text-sm">
+              <div className="flex gap-6">
+                <a href="/offer" className="text-cream-muted hover:text-cream transition-colors underline underline-offset-4">
+                  Договор оферты
+                </a>
+                <a href="/privacy" className="text-cream-muted hover:text-cream transition-colors underline underline-offset-4">
+                  Политика конфиденциальности
+                </a>
+              </div>
+              <p className="text-cream-muted">
+                © 2025 Все права защищены
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
 
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-dark-bg/95 backdrop-blur-sm border-t border-cream/10 sm:hidden">

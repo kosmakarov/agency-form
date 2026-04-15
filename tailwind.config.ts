@@ -29,9 +29,24 @@ const config: Config = {
           300: '#f5ede0',
           400: '#ede0cc',
         },
+        // Consultation page palette
+        dark: {
+          bg: '#1A1A2E',
+          card: '#232338',
+        },
+        gold: {
+          DEFAULT: '#C4A35A',
+          light: '#D4B86A',
+          dark: '#A8894A',
+        },
+        cream: {
+          DEFAULT: '#F5F3EE',
+          muted: '#8A8778',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        georgia: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
     },
   },

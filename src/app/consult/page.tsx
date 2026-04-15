@@ -10,8 +10,7 @@ export default function ConsultPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const handlePayment = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handlePayment = async (paymentMethod: 'sbp' | 'bank_card') => {
     setError('')
 
     if (!email) {
@@ -25,7 +24,7 @@ export default function ConsultPage() {
       const response = await fetch('/api/payment/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, email, paymentMethod }),
       })
 
       const data = await response.json()
@@ -215,7 +214,7 @@ export default function ConsultPage() {
             <h3 className="font-georgia text-2xl mb-2">Оплата консультации</h3>
             <p className="text-cream-muted text-sm mb-6">10 000 ₽ · 1.5 часа</p>
 
-            <form onSubmit={handlePayment} className="space-y-4">
+            <div className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm text-cream-muted mb-2">
                   Имя
@@ -239,7 +238,6 @@ export default function ConsultPage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                   className="w-full px-4 py-3 rounded-lg bg-dark-bg border border-cream/20 text-cream placeholder-cream-muted focus:border-gold focus:outline-none transition-colors"
                   placeholder="Для отправки чека"
                 />
@@ -249,12 +247,24 @@ export default function ConsultPage() {
                 <p className="text-red-400 text-sm">{error}</p>
               )}
 
+              {/* SBP Button - Primary */}
               <button
-                type="submit"
+                type="button"
+                onClick={() => handlePayment('sbp')}
                 disabled={isLoading}
                 className="w-full bg-gold hover:bg-gold-light disabled:bg-gold/50 text-dark-bg font-medium py-4 rounded-lg transition-colors duration-200"
               >
-                {isLoading ? 'Переход к оплате...' : 'Перейти к оплате'}
+                {isLoading ? 'Переход к оплате...' : 'Оплатить через СБП'}
+              </button>
+
+              {/* Card Button - Secondary */}
+              <button
+                type="button"
+                onClick={() => handlePayment('bank_card')}
+                disabled={isLoading}
+                className="w-full text-cream-muted hover:text-cream text-sm py-2 transition-colors"
+              >
+                Оплатить картой
               </button>
 
               <p className="text-cream-muted text-xs text-center">
@@ -263,7 +273,7 @@ export default function ConsultPage() {
                   договором оферты
                 </Link>
               </p>
-            </form>
+            </div>
           </div>
         </div>
       )}

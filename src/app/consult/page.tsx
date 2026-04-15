@@ -135,8 +135,8 @@ export default function ConsultPage() {
             <div className="text-cream-muted text-sm space-y-1">
               <p className="text-cream font-medium mb-3">КОСТЯ</p>
               <p>ИП Макаров Константин Александрович</p>
-              <p>ОГРНИП 324784700403025</p>
-              <p>ИНН 781430842498</p>
+              <p>ОГРНИП 319631300129246</p>
+              <p>ИНН 633012547575</p>
             </div>
 
             {/* Right side - Links */}

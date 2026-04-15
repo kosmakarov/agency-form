@@ -212,7 +212,14 @@ export default function ConsultPage() {
             </button>
 
             <h3 className="font-georgia text-2xl mb-2">Оплата консультации</h3>
-            <p className="text-cream-muted text-sm mb-6">10 000 ₽ · 1.5 часа</p>
+            <p className="text-cream-muted text-sm mb-4">10 000 ₽ · 1.5 часа</p>
+
+            {/* VPN Warning */}
+            <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 mb-6">
+              <p className="text-cream text-sm">
+                ⚠️ Если у вас включён VPN — выключите его перед оплатой
+              </p>
+            </div>
 
             <div className="space-y-4">
               <div>

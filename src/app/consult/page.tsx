@@ -3,8 +3,88 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
+const quotes = [
+  {
+    niche: 'Цветочный магазин',
+    text: 'У меня нет ежедневных, да и еженедельных классных кейсов, которые можно рассказывать в Reels. Обычный день предпринимателя, нет каких-то сверх сложностей, много рутины. Я вроде и так её показываю. Обучать флористике — не моё, обучать предпринимательству — тем более. На чём строить контент?'
+  },
+  {
+    niche: 'Владелец магазина',
+    text: 'Как быть, если у меня сейчас большое желание закрыть магазин, так как грядёт 2026 год. Но мне бы не хотелось заранее об этом говорить. И сразу вопрос — если закроемся 31.12, что дальше-то в блоге говорить? Я уже не предприниматель.'
+  },
+  {
+    niche: 'Предприниматель',
+    text: 'Каша в голове. Совет — как Костя видит меня со стороны, о чём мне можно было бы вещать.'
+  },
+  {
+    niche: 'Предприниматель',
+    text: 'Как совмещать личные проекты, семью, работу и не бросать вести блог?'
+  },
+  {
+    niche: 'Иммиграционная компания',
+    text: 'Блог нужен для выстраивания доверия и больших продаж. Главный затык — начать и побороть перфекционизм, убрать фомо по поводу ИИ-контента и начать уже делать хоть что-то.'
+  },
+  {
+    niche: 'Импорт из Китая',
+    text: 'Планирую ехать жить в Китай и снимать контент на выставках и производствах. Но самая основная проблема возможно в голове — боюсь камеру. Ролики которые пытался делать, кажется что выгляжу как клоун. Думал взять очки Ray-Ban и вести контент от прямого лица.'
+  },
+  {
+    niche: 'Продажи на маркетплейсах',
+    text: 'Продаю на ВБ женскую обувь. Цель блога — расти в подписчиках и переливать трафик в Telegram, там уже продавать обувь. Но блог вести не об обуви. Не понимаю о чём.'
+  },
+  {
+    niche: 'Производство латуни',
+    text: 'У меня производство изделий из латуни для интерьера. Создали новую страницу, так как старая ушла в тень. Затык — как набрать свою ЦА и как можно быстрее.'
+  },
+  {
+    niche: 'Запчасти для спецтехники',
+    text: 'Блог нулевой, только собираюсь делать. Продаём запчасти к сельхозтехнике и спецтехнике. Затык — не могу собраться это сделать.'
+  },
+  {
+    niche: 'Продажа авто из Китая',
+    text: 'Могу поехать на фабрику, показать машины, товары. Не могу понять, как сделать так, чтобы контент именно продавал. Тестировал — сделал ролик где дети взрывают бомбочки в Китае, 15 000 просмотров. А там где машину продаю — 200 просмотров. Хочется понять, как делать контент, чтобы он именно продавал.'
+  },
+  {
+    niche: 'Ресторанный сервис',
+    text: 'Можем ли мы с тобой личный бренд мой качнуть с целью популяризации моего сервиса — привлечь рестораторов, потом и банк, чтобы сервис продать.'
+  },
+  {
+    niche: 'B2B сервис',
+    text: 'Хочу понять, можно ли продвигать себя и свой продукт в B2B сегменте, и если да — то как это делать.'
+  },
+  {
+    niche: 'Владелец бизнеса с SMM',
+    text: 'Мой блог стоит мёртвым грузом, инстаграм совсем не продаёт. Несмотря на то, что мы работаем с SMM и стараемся. Развития нет сильного. Очень маленький прирост подписчиков, заявок из инст нет совсем. Вроде уже и упаковались и бренд сделали. А всё стоит.'
+  },
+  {
+    niche: 'Супруга предпринимателя',
+    text: 'Моя супруга сейчас пытается забустить свой личный блог, но пока что это получается безуспешно. Не может найти именно тот формат, который будет тем самым. У неё крайне специфичная ниша.'
+  },
+  {
+    niche: 'IT-консалтинг',
+    text: 'Сам не понимаю толком, зачем блог. По идее что-то я должен продавать, а вот что — хз. Задача на этот год определиться, но немного страшно идти в публичность. Думал что-то комментировать стартапы и новости из мира технологий, экспертность прокачивать, и люди брали бы консультации по развитию компании.'
+  },
+  {
+    niche: 'AI-консалтинг',
+    text: 'Не могу понять, что хочу снимать и как выстроить систему. Цель — зарабатывать на доп услугах. Но пока не понимаю, что будет лучше: AI в брендинге/маркетинге/продукте, или COO на аутсорсе. В общем, пока раздрай. Не могу свою фишку вытащить.'
+  },
+  {
+    niche: 'Предприниматель с блогом',
+    text: 'Цель — вырастить лояльную платёжеспособную аудиторию. Главный затык — мало подписок, либо приходят, но потом не смотрят в сторис и не покупают услуги.'
+  },
+  {
+    niche: 'Вопрос про формат',
+    text: 'Какой мне показывать контент, какого формата? Это должны быть супер-фишки, пять пунктов? Или кейсы до-после? Или просто ежедневная рутина? Стоит ли делать лайф-контент и экспертный, чтобы подписывались предприниматели и уже обращались за услугой?'
+  },
+  {
+    niche: 'Вопрос про позиционирование',
+    text: 'Как позиционировать себя? На какие темы определиться и снимать блог? Ты делегируешь или сам делаешь? Как сценарии прорабатываешь, что важно? Просто понять бы, как Костя вдохновляется — он сидит и пишет сам сценарий?'
+  }
+]
+
 export default function ConsultPage() {
   const [showPaymentForm, setShowPaymentForm] = useState(false)
+  const [showAllQuotes, setShowAllQuotes] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -42,9 +122,19 @@ export default function ConsultPage() {
     }
   }
 
-  const scrollToPayment = () => {
-    document.getElementById('payment')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const visibleQuotes = showAllQuotes ? quotes : quotes.slice(0, 8)
+
+  const CTAButton = () => (
+    <button
+      onClick={() => setShowPaymentForm(true)}
+      className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
+    >
+      Записаться на консультацию — 10 000 ₽
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+  )
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
@@ -67,17 +157,17 @@ export default function ConsultPage() {
 
         <div className="max-w-4xl w-full relative z-10">
           {/* Header */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-6 tracking-widest uppercase">
               Консультация
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-4">
-              Разберёмся, зачем тебе <span className="text-gold">блог</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-3">
+              Консультация по личному блогу
             </h1>
 
-            <p className="text-lg text-white/60 mb-2">
-              Посмотри это видео — расскажу, чем могу помочь
+            <p className="text-lg text-white/60">
+              Один на один · 1.5 часа · онлайн
             </p>
           </div>
 
@@ -94,105 +184,104 @@ export default function ConsultPage() {
             </video>
           </div>
 
-          <p className="text-white/40 text-sm mt-4 text-center">3 минуты</p>
+          <p className="text-white/40 text-sm mt-4 text-center">2:44</p>
 
           {/* CTA after video */}
-          <div className="text-center mt-10">
-            <button
-              onClick={scrollToPayment}
-              className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
-            >
-              Записаться на консультацию
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-              </svg>
-            </button>
+          <div className="text-center mt-8">
+            <CTAButton />
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Quotes Section */}
       <section className="py-20 px-6 bg-[#0d0d0d]">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-16">
-            Что ты получишь
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-3">
+            С чем приходят на консультацию
           </h2>
+          <p className="text-white/50 text-center mb-12">
+            Вот реальные сообщения, которые мне пишут в директ перед тем, как записаться.
+          </p>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
-              <h3 className="text-gold text-xl font-semibold mb-4">Ясность</h3>
-              <p className="text-white/60 leading-relaxed">
-                Поймёшь, зачем тебе блог на самом деле — не абстрактно «для бизнеса», а конкретно. Чтобы не бросить через месяц.
-              </p>
-            </div>
-
-            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
-              <h3 className="text-gold text-xl font-semibold mb-4">Уникальность</h3>
-              <p className="text-white/60 leading-relaxed">
-                Увижу, в чём твоя сила, и покажу тебе. Какие темы, какой формат, какие истории из твоей жизни зацепят аудиторию.
-              </p>
-            </div>
-
-            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
-              <h3 className="text-gold text-xl font-semibold mb-4">Первый шаг</h3>
-              <p className="text-white/60 leading-relaxed">
-                Уйдёшь с конкретными темами и пониманием, что делать завтра. Не стратегия на 50 страниц — а ясный план на первую неделю.
-              </p>
-            </div>
+          {/* Quotes Grid */}
+          <div className="columns-1 md:columns-2 gap-4 space-y-4">
+            {visibleQuotes.map((quote, index) => (
+              <div
+                key={index}
+                className="break-inside-avoid p-5 bg-white/[0.03] border border-white/[0.08] rounded-xl"
+              >
+                <p className="text-gold text-sm font-medium mb-2">{quote.niche}</p>
+                <p className="text-white/70 leading-relaxed">«{quote.text}»</p>
+              </div>
+            ))}
           </div>
 
-          {/* For Whom */}
-          <p className="text-lg text-white/50 leading-relaxed text-center mt-16 max-w-2xl mx-auto">
-            Если ты предприниматель или эксперт, который понимает что блог нужен, но всё никак не начнёт. Или уже пробовал — и не получилось.
-          </p>
-        </div>
-      </section>
+          {/* Show more button */}
+          {!showAllQuotes && quotes.length > 8 && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAllQuotes(true)}
+                className="text-white/40 hover:text-white text-sm transition-colors"
+              >
+                Показать ещё {quotes.length - 8} сообщений
+              </button>
+            </div>
+          )}
 
-      {/* Price & Payment Section */}
-      <section id="payment" className="py-20 px-6">
-        <div className="max-w-xl mx-auto text-center">
-          <p className="text-5xl sm:text-6xl font-semibold mb-4">
-            10 000 ₽
-          </p>
-          <p className="text-white/40 mb-10">
-            1.5 часа · один на один · онлайн
+          {/* Conclusion */}
+          <p className="text-xl sm:text-2xl font-medium text-center mt-16 text-white/80">
+            Ниши разные. Запрос один — «я не понимаю, кто я и про что говорить».
           </p>
 
-          <button
-            onClick={() => setShowPaymentForm(true)}
-            className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-10 py-5 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
-          >
-            Записаться и оплатить
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
+          {/* CTA after quotes */}
+          <div className="text-center mt-10">
+            <CTAButton />
+          </div>
         </div>
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-20 px-6 bg-[#0d0d0d]">
-        <div className="max-w-sm mx-auto">
-          <p className="text-white/40 text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
-          <div className="space-y-4">
-            <video
-              className="w-full rounded-2xl"
-              controls
-              preload="metadata"
-              playsInline
-              poster="/review-1-poster.jpg"
-            >
-              <source src="/review-1.mp4" type="video/mp4" />
-            </video>
-            <video
-              className="w-full rounded-2xl"
-              controls
-              preload="metadata"
-              playsInline
-              poster="/review-2-poster.jpg"
-            >
-              <source src="/review-2.mp4" type="video/mp4" />
-            </video>
+      <section className="py-20 px-6">
+        <div className="max-w-md mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-12">
+            Отзывы
+          </h2>
+
+          <div className="space-y-8">
+            <div>
+              <video
+                className="w-full rounded-2xl"
+                controls
+                preload="metadata"
+                playsInline
+                poster="/review-1-poster.jpg"
+              >
+                <source src="/review-1.mp4" type="video/mp4" />
+              </video>
+              <p className="text-white/60 text-sm mt-3 text-center">
+                <span className="text-white">Евгения Бажина</span> · Маркетплейсы, Самара
+              </p>
+            </div>
+
+            <div>
+              <video
+                className="w-full rounded-2xl"
+                controls
+                preload="metadata"
+                playsInline
+                poster="/review-2-poster.jpg"
+              >
+                <source src="/review-2.mp4" type="video/mp4" />
+              </video>
+              <p className="text-white/60 text-sm mt-3 text-center">
+                <span className="text-white">Евгения Бажина</span> · Маркетплейсы, Самара
+              </p>
+            </div>
+          </div>
+
+          {/* CTA after reviews */}
+          <div className="text-center mt-12">
+            <CTAButton />
           </div>
         </div>
       </section>
@@ -225,7 +314,7 @@ export default function ConsultPage() {
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 sm:hidden z-40">
         <button
-          onClick={scrollToPayment}
+          onClick={() => setShowPaymentForm(true)}
           className="block w-full bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold py-4 rounded-lg text-center transition-colors duration-200"
         >
           Записаться · 10 000 ₽

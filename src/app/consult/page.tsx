@@ -42,80 +42,141 @@ export default function ConsultPage() {
     }
   }
 
-  return (
-    <main className="min-h-screen bg-dark-bg text-cream">
-      {/* Main content */}
-      <div className="max-w-2xl mx-auto px-5 py-10 pb-32 sm:pb-16">
+  const scrollToVSL = () => {
+    document.getElementById('vsl')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
-        {/* 1. Video Section */}
-        <section className="mb-16">
-          <div className="relative aspect-video bg-dark-card rounded-xl overflow-hidden">
-            <video
-              className="w-full h-full object-cover"
-              poster="/consult-poster.jpg"
-              controls
-              preload="metadata"
-              playsInline
-            >
-              <source src="/consult-video.mp4" type="video/mp4" />
-              Ваш браузер не поддерживает видео.
-            </video>
-            {/* Placeholder overlay - remove when video is uploaded */}
-            <div className="absolute inset-0 flex items-center justify-center bg-dark-card">
+  return (
+    <main className="min-h-screen bg-[#0a0a0a] text-white">
+
+      {/* Hero Section with Video Background */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-[#0a0a0a]/60 to-[#0a0a0a]" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-3xl">
+          <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-8 tracking-widest uppercase">
+            Консультация
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight mb-6">
+            Разберёмся,<br />зачем тебе <span className="text-gold">блог</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-white/70 mb-10 max-w-xl mx-auto leading-relaxed">
+            1.5 часа один на один. Уйдёшь с ясностью, темами и планом на первую неделю.
+          </p>
+
+          <button
+            onClick={scrollToVSL}
+            className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
+          >
+            Смотреть видео
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </button>
+
+          <p className="mt-6 text-white/40 text-sm">10 000 ₽</p>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
+      </section>
+
+      {/* VSL Video Section */}
+      <section id="vsl" className="py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="relative aspect-video bg-[#151515] rounded-2xl overflow-hidden border border-white/10">
+            {/* Placeholder - replace when VSL is ready */}
+            <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                  <svg className="w-10 h-10 text-gold" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
-                <p className="text-cream-muted text-sm">Видео скоро появится</p>
+                <p className="text-white/40 text-sm">Видео скоро появится</p>
               </div>
             </div>
+            {/* Uncomment when VSL is ready:
+            <video
+              className="w-full h-full"
+              controls
+              preload="metadata"
+              playsInline
+              poster="/vsl-poster.jpg"
+            >
+              <source src="/vsl.mp4" type="video/mp4" />
+            </video>
+            */}
           </div>
-          <p className="text-cream-muted text-sm mt-3 text-center">6 минут</p>
-        </section>
+          <p className="text-white/40 text-sm mt-4 text-center">6 минут</p>
+        </div>
+      </section>
 
-        {/* 2. Benefits Section */}
-        <section className="mb-16">
-          <h2 className="font-georgia text-2xl sm:text-3xl mb-10 text-center">
-            Что вы получите
+      {/* Benefits Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-16">
+            Что ты получишь
           </h2>
 
-          <div className="space-y-10">
-            <div>
-              <h3 className="text-gold font-georgia text-xl mb-3">Ясность</h3>
-              <p className="text-cream/90 leading-relaxed">
-                Поймёте, зачем вам блог на самом деле — не абстрактно «для бизнеса», а конкретно. Чтобы не бросить через месяц.
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
+              <h3 className="text-gold text-xl font-semibold mb-4">Ясность</h3>
+              <p className="text-white/60 leading-relaxed">
+                Поймёшь, зачем тебе блог на самом деле — не абстрактно «для бизнеса», а конкретно. Чтобы не бросить через месяц.
               </p>
             </div>
 
-            <div>
-              <h3 className="text-gold font-georgia text-xl mb-3">Уникальность</h3>
-              <p className="text-cream/90 leading-relaxed">
-                Я увижу, в чём ваша сила, и покажу вам. Какие темы, какой формат, какие истории из вашей жизни зацепят аудиторию.
+            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
+              <h3 className="text-gold text-xl font-semibold mb-4">Уникальность</h3>
+              <p className="text-white/60 leading-relaxed">
+                Увижу, в чём твоя сила, и покажу тебе. Какие темы, какой формат, какие истории из твоей жизни зацепят аудиторию.
               </p>
             </div>
 
-            <div>
-              <h3 className="text-gold font-georgia text-xl mb-3">Первый шаг</h3>
-              <p className="text-cream/90 leading-relaxed">
-                Уйдёте с конкретными темами и пониманием, что делать завтра. Не стратегия на 50 страниц — а ясный план на первую неделю.
+            <div className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.05] hover:border-gold/30 transition-all duration-300">
+              <h3 className="text-gold text-xl font-semibold mb-4">Первый шаг</h3>
+              <p className="text-white/60 leading-relaxed">
+                Уйдёшь с конкретными темами и пониманием, что делать завтра. Не стратегия на 50 страниц — а ясный план на первую неделю.
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 3. For Whom Section */}
-        <section className="mb-16">
-          <p className="text-cream/80 text-lg leading-relaxed text-center">
-            Если вы предприниматель или эксперт, который понимает что блог нужен, но всё никак не начнёт. Или уже пробовал — и не получилось.
+      {/* For Whom Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-lg sm:text-xl text-white/60 leading-relaxed">
+            Если ты предприниматель или эксперт, который понимает что блог нужен, но всё никак не начнёт. Или уже пробовал — и не получилось.
           </p>
-        </section>
+        </div>
+      </section>
 
-        {/* 4. Testimonial Section */}
-        <section className="mb-16">
-          <p className="text-cream-muted text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
-          <div className="space-y-3 max-w-xs mx-auto">
+      {/* Testimonial Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-sm mx-auto">
+          <p className="text-white/40 text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
+          <div className="space-y-4">
             <video
               className="w-full rounded-2xl"
               controls
@@ -135,94 +196,91 @@ export default function ConsultPage() {
               <source src="/review-2.mp4" type="video/mp4" />
             </video>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 5. Price Section */}
-        <section className="text-center mb-8">
-          <div className="mb-6">
-            <p className="text-4xl sm:text-5xl font-georgia text-cream mb-3">
-              10 000 ₽
-            </p>
-            <p className="text-cream-muted">
-              1.5 часа · один на один · онлайн
-            </p>
-          </div>
+      {/* Price Section */}
+      <section className="py-20 px-6 text-center">
+        <p className="text-5xl sm:text-6xl font-semibold mb-4">
+          10 000 ₽
+        </p>
+        <p className="text-white/40 mb-10">
+          1.5 часа · один на один · онлайн
+        </p>
 
-          {/* Desktop CTA */}
-          <button
-            onClick={() => setShowPaymentForm(true)}
-            className="hidden sm:inline-block bg-gold hover:bg-gold-light text-dark-bg font-medium px-10 py-4 rounded-lg transition-colors duration-200"
-          >
-            Записаться и оплатить
-          </button>
-        </section>
-
-      </div>
+        <button
+          onClick={() => setShowPaymentForm(true)}
+          className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-10 py-5 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
+        >
+          Записаться и оплатить
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-[#0D0D14] border-t border-cream/5 mt-16 pb-24 sm:pb-8">
-        <div className="max-w-4xl mx-auto px-5 py-10">
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-8">
-            <div className="text-cream-muted text-sm space-y-1">
-              <p>ИП Макаров Константин Александрович</p>
-              <p>ОГРНИП 319631300129246</p>
-              <p>ИНН 633012547575</p>
-            </div>
+      <footer className="border-t border-white/[0.05] py-12 px-6">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:justify-between gap-8">
+          <div className="text-white/40 text-sm space-y-1">
+            <p>ИП Макаров Константин Александрович</p>
+            <p>ОГРНИП 319631300129246</p>
+            <p>ИНН 633012547575</p>
+          </div>
 
-            <div className="flex flex-col sm:items-end gap-4 text-sm">
-              <div className="flex gap-6">
-                <Link href="/offer" className="text-cream-muted hover:text-cream transition-colors underline underline-offset-4">
-                  Договор оферты
-                </Link>
-                <Link href="/privacy" className="text-cream-muted hover:text-cream transition-colors underline underline-offset-4">
-                  Политика конфиденциальности
-                </Link>
-              </div>
-              <p className="text-cream-muted">
-                © 2025 Все права защищены
-              </p>
+          <div className="flex flex-col sm:items-end gap-4 text-sm">
+            <div className="flex gap-6">
+              <Link href="/offer" className="text-white/40 hover:text-white transition-colors underline underline-offset-4">
+                Договор оферты
+              </Link>
+              <Link href="/privacy" className="text-white/40 hover:text-white transition-colors underline underline-offset-4">
+                Политика конфиденциальности
+              </Link>
             </div>
+            <p className="text-white/40">
+              © 2025 Все права защищены
+            </p>
           </div>
         </div>
       </footer>
 
       {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-dark-bg/95 backdrop-blur-sm border-t border-cream/10 sm:hidden">
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 sm:hidden z-40">
         <button
           onClick={() => setShowPaymentForm(true)}
-          className="block w-full bg-gold hover:bg-gold-light text-dark-bg font-medium py-4 rounded-lg text-center transition-colors duration-200"
+          className="block w-full bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold py-4 rounded-lg text-center transition-colors duration-200"
         >
-          Записаться и оплатить
+          Записаться · 10 000 ₽
         </button>
       </div>
 
       {/* Payment Modal */}
       {showPaymentForm && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-dark-card rounded-2xl p-6 sm:p-8 max-w-md w-full relative">
+          <div className="bg-[#151515] border border-white/10 rounded-2xl p-6 sm:p-8 max-w-md w-full relative">
             {/* Close button */}
             <button
               onClick={() => setShowPaymentForm(false)}
-              className="absolute top-4 right-4 text-cream-muted hover:text-cream transition-colors"
+              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <h3 className="font-georgia text-2xl mb-2">Оплата консультации</h3>
-            <p className="text-cream-muted text-sm mb-4">10 000 ₽ · 1.5 часа</p>
+            <h3 className="text-2xl font-semibold mb-2">Оплата консультации</h3>
+            <p className="text-white/40 text-sm mb-4">10 000 ₽ · 1.5 часа</p>
 
             {/* VPN Warning */}
             <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 mb-6">
-              <p className="text-cream text-sm">
+              <p className="text-white text-sm">
                 ⚠️ Если у вас включён VPN — выключите его перед оплатой
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm text-cream-muted mb-2">
+                <label htmlFor="name" className="block text-sm text-white/40 mb-2">
                   Имя
                 </label>
                 <input
@@ -230,13 +288,13 @@ export default function ConsultPage() {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-dark-bg border border-cream/20 text-cream placeholder-cream-muted focus:border-gold focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#0a0a0a] border border-white/20 text-white placeholder-white/30 focus:border-gold focus:outline-none transition-colors"
                   placeholder="Как к вам обращаться"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm text-cream-muted mb-2">
+                <label htmlFor="email" className="block text-sm text-white/40 mb-2">
                   Email <span className="text-gold">*</span>
                 </label>
                 <input
@@ -244,7 +302,7 @@ export default function ConsultPage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-dark-bg border border-cream/20 text-cream placeholder-cream-muted focus:border-gold focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#0a0a0a] border border-white/20 text-white placeholder-white/30 focus:border-gold focus:outline-none transition-colors"
                   placeholder="Для отправки чека"
                 />
               </div>
@@ -258,7 +316,7 @@ export default function ConsultPage() {
                 type="button"
                 onClick={() => handlePayment('sbp')}
                 disabled={isLoading}
-                className="w-full bg-gold hover:bg-gold-light disabled:bg-gold/50 text-dark-bg font-medium py-4 rounded-lg transition-colors duration-200"
+                className="w-full bg-gold hover:bg-gold-light disabled:bg-gold/50 text-[#0a0a0a] font-semibold py-4 rounded-lg transition-colors duration-200"
               >
                 {isLoading ? 'Переход к оплате...' : 'Оплатить через СБП'}
               </button>
@@ -268,14 +326,14 @@ export default function ConsultPage() {
                 type="button"
                 onClick={() => handlePayment('bank_card')}
                 disabled={isLoading}
-                className="w-full text-cream-muted hover:text-cream text-sm py-2 transition-colors"
+                className="w-full text-white/40 hover:text-white text-sm py-2 transition-colors"
               >
                 Оплатить картой
               </button>
 
-              <p className="text-cream-muted text-xs text-center">
+              <p className="text-white/30 text-xs text-center">
                 Нажимая кнопку, вы соглашаетесь с{' '}
-                <Link href="/offer" className="underline hover:text-cream">
+                <Link href="/offer" className="underline hover:text-white">
                   договором оферты
                 </Link>
               </p>

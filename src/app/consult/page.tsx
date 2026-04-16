@@ -88,7 +88,7 @@ export default function ConsultPage() {
               controls
               preload="metadata"
               playsInline
-              poster="/vsl-poster.jpg"
+              poster="/vsl-poster.png"
             >
               <source src="/vsl.mp4" type="video/mp4" />
             </video>

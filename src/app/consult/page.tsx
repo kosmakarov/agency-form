@@ -83,18 +83,6 @@ export default function ConsultPage() {
 
           {/* VSL Video - Main Focus */}
           <div className="relative aspect-video bg-[#151515] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-            {/* Placeholder - replace when VSL is ready */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center cursor-pointer hover:bg-gold/30 transition-colors">
-                  <svg className="w-12 h-12 text-gold ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-                <p className="text-white/40 text-sm">Видео скоро появится</p>
-              </div>
-            </div>
-            {/* Uncomment when VSL is ready:
             <video
               className="w-full h-full"
               controls
@@ -104,10 +92,9 @@ export default function ConsultPage() {
             >
               <source src="/vsl.mp4" type="video/mp4" />
             </video>
-            */}
           </div>
 
-          <p className="text-white/40 text-sm mt-4 text-center">6 минут</p>
+          <p className="text-white/40 text-sm mt-4 text-center">3 минуты</p>
 
           {/* CTA after video */}
           <div className="text-center mt-10">

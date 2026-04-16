@@ -185,11 +185,6 @@ export default function ConsultPage() {
           </div>
 
           <p className="text-white/40 text-sm mt-4 text-center">2:44</p>
-
-          {/* CTA after video */}
-          <div className="text-center mt-8">
-            <CTAButton />
-          </div>
         </div>
       </section>
 

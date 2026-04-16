@@ -42,73 +42,38 @@ export default function ConsultPage() {
     }
   }
 
-  const scrollToVSL = () => {
-    document.getElementById('vsl')?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToPayment = () => {
+    document.getElementById('payment')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
 
-      {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+      {/* Hero Section with VSL Video */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-16">
+        <div className="max-w-4xl w-full">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-6 tracking-widest uppercase">
+              Консультация
+            </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-[#0a0a0a]/60 to-[#0a0a0a]" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-4">
+              Разберёмся, зачем тебе <span className="text-gold">блог</span>
+            </h1>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-3xl">
-          <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-8 tracking-widest uppercase">
-            Консультация
+            <p className="text-lg text-white/60 mb-2">
+              Посмотри это видео — расскажу, чем могу помочь
+            </p>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight mb-6">
-            Разберёмся,<br />зачем тебе <span className="text-gold">блог</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-white/70 mb-10 max-w-xl mx-auto leading-relaxed">
-            1.5 часа один на один. Уйдёшь с ясностью, темами и планом на первую неделю.
-          </p>
-
-          <button
-            onClick={scrollToVSL}
-            className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
-          >
-            Смотреть видео
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
-          </button>
-
-          <p className="mt-6 text-white/40 text-sm">10 000 ₽</p>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
-          </svg>
-        </div>
-      </section>
-
-      {/* VSL Video Section */}
-      <section id="vsl" className="py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="relative aspect-video bg-[#151515] rounded-2xl overflow-hidden border border-white/10">
+          {/* VSL Video - Main Focus */}
+          <div className="relative aspect-video bg-[#151515] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
             {/* Placeholder - replace when VSL is ready */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                  <svg className="w-10 h-10 text-gold" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center cursor-pointer hover:bg-gold/30 transition-colors">
+                  <svg className="w-12 h-12 text-gold ml-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
@@ -127,12 +92,26 @@ export default function ConsultPage() {
             </video>
             */}
           </div>
+
           <p className="text-white/40 text-sm mt-4 text-center">6 минут</p>
+
+          {/* CTA after video */}
+          <div className="text-center mt-10">
+            <button
+              onClick={scrollToPayment}
+              className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
+            >
+              Записаться на консультацию
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-[#0d0d0d]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-16">
             Что ты получишь
@@ -160,20 +139,38 @@ export default function ConsultPage() {
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* For Whom Section */}
-      <section className="py-16 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-lg sm:text-xl text-white/60 leading-relaxed">
+          {/* For Whom */}
+          <p className="text-lg text-white/50 leading-relaxed text-center mt-16 max-w-2xl mx-auto">
             Если ты предприниматель или эксперт, который понимает что блог нужен, но всё никак не начнёт. Или уже пробовал — и не получилось.
           </p>
         </div>
       </section>
 
+      {/* Price & Payment Section */}
+      <section id="payment" className="py-20 px-6">
+        <div className="max-w-xl mx-auto text-center">
+          <p className="text-5xl sm:text-6xl font-semibold mb-4">
+            10 000 ₽
+          </p>
+          <p className="text-white/40 mb-10">
+            1.5 часа · один на один · онлайн
+          </p>
+
+          <button
+            onClick={() => setShowPaymentForm(true)}
+            className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-10 py-5 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
+          >
+            Записаться и оплатить
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
       {/* Testimonial Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-[#0d0d0d]">
         <div className="max-w-sm mx-auto">
           <p className="text-white/40 text-sm mb-6 text-center">Отзыв от Евгении Бажиной</p>
           <div className="space-y-4">
@@ -197,26 +194,6 @@ export default function ConsultPage() {
             </video>
           </div>
         </div>
-      </section>
-
-      {/* Price Section */}
-      <section className="py-20 px-6 text-center">
-        <p className="text-5xl sm:text-6xl font-semibold mb-4">
-          10 000 ₽
-        </p>
-        <p className="text-white/40 mb-10">
-          1.5 часа · один на один · онлайн
-        </p>
-
-        <button
-          onClick={() => setShowPaymentForm(true)}
-          className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-10 py-5 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
-        >
-          Записаться и оплатить
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
       </section>
 
       {/* Footer */}
@@ -247,7 +224,7 @@ export default function ConsultPage() {
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 sm:hidden z-40">
         <button
-          onClick={() => setShowPaymentForm(true)}
+          onClick={scrollToPayment}
           className="block w-full bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold py-4 rounded-lg text-center transition-colors duration-200"
         >
           Записаться · 10 000 ₽

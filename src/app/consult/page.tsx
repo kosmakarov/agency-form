@@ -50,8 +50,22 @@ export default function ConsultPage() {
     <main className="min-h-screen bg-[#0a0a0a] text-white">
 
       {/* Hero Section with VSL Video */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-16">
-        <div className="max-w-4xl w-full">
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
+        {/* Ocean Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#0a0a0a]/70" />
+
+        <div className="max-w-4xl w-full relative z-10">
           {/* Header */}
           <div className="text-center mb-10">
             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-6 tracking-widest uppercase">

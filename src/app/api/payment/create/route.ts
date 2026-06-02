@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     // Build payment request
     const paymentData: Record<string, unknown> = {
       amount: {
-        value: '10000.00',
+        value: '15000.00',
         currency: 'RUB',
       },
       capture: true,
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
             description: 'Консультация по развитию блога',
             quantity: '1',
             amount: {
-              value: '10000.00',
+              value: '15000.00',
               currency: 'RUB',
             },
             vat_code: 1, // Без НДС

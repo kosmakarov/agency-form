@@ -3,6 +3,28 @@ import { NextResponse } from 'next/server'
 const YOOKASSA_SHOP_ID = process.env.YOOKASSA_SHOP_ID
 const YOOKASSA_SECRET_KEY = process.env.YOOKASSA_SECRET_KEY
 
+// Каталог продуктов. Цена берётся ТОЛЬКО отсюда по ключу продукта —
+// клиент не может подменить сумму, передаёт лишь ключ.
+const PRODUCTS: Record<string, {
+  value: string
+  description: string
+  itemDescription: string
+  successPath: string
+}> = {
+  consult: {
+    value: '15000.00',
+    description: 'Консультация по блогу (1.5 часа)',
+    itemDescription: 'Консультация по развитию блога',
+    successPath: '/consult/success',
+  },
+  founders: {
+    value: '69900.00',
+    description: 'Сериал Основателя — личное сопровождение по внедрению блога',
+    itemDescription: 'Сериал Основателя (личное сопровождение)',
+    successPath: '/founders/success',
+  },
+}
+
 export async function POST(request: Request) {
   try {
     // Check credentials
@@ -12,39 +34,45 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { email, name, paymentMethod } = body
+    const { email, name, paymentMethod, product } = body
 
     if (!email) {
       return NextResponse.json({ error: 'Email обязателен для чека' }, { status: 400 })
     }
 
-    console.log('Creating payment for:', email, 'method:', paymentMethod)
+    // Выбираем продукт (по умолчанию — консультация, для обратной совместимости)
+    const productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
+    const p = PRODUCTS[productKey]
+
+    console.log('Creating payment for:', email, 'method:', paymentMethod, 'product:', productKey)
 
     // Generate idempotence key
     const idempotenceKey = crypto.randomUUID()
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://agency-form-lac.vercel.app'
+
     // Build payment request
     const paymentData: Record<string, unknown> = {
       amount: {
-        value: '15000.00',
+        value: p.value,
         currency: 'RUB',
       },
       capture: true,
       confirmation: {
         type: 'redirect',
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://agency-form-lac.vercel.app'}/consult/success`,
+        return_url: `${baseUrl}${p.successPath}`,
       },
-      description: 'Консультация по блогу (1.5 часа)',
+      description: p.description,
       receipt: {
         customer: {
           email: email,
         },
         items: [
           {
-            description: 'Консультация по развитию блога',
+            description: p.itemDescription,
             quantity: '1',
             amount: {
-              value: '15000.00',
+              value: p.value,
               currency: 'RUB',
             },
             vat_code: 1, // Без НДС
@@ -56,6 +84,7 @@ export async function POST(request: Request) {
       metadata: {
         name: name || '',
         email: email,
+        product: productKey,
       },
     }
 

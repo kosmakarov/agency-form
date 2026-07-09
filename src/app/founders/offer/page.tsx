@@ -18,7 +18,7 @@ export default function FoundersOfferPage() {
         </Link>
 
         <h1 className="font-georgia text-3xl sm:text-4xl mb-2">Оферта — «Сериал Основателя»</h1>
-        <p className="text-cream-muted mb-10">Действующая редакция от 20.08.2026 г.</p>
+        <p className="text-cream-muted mb-10">Действующая редакция от 09.07.2026 г.</p>
 
         <div className="prose prose-invert prose-cream max-w-none space-y-8 text-cream/90 leading-relaxed">
           <p>

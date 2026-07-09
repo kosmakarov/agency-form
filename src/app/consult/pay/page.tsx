@@ -100,16 +100,6 @@ export default function DirectPayPage() {
             {isLoading ? 'Переход к оплате...' : 'Оплатить через СБП'}
           </button>
 
-          {/* Card Button - Secondary */}
-          <button
-            type="button"
-            onClick={() => handlePayment('bank_card')}
-            disabled={isLoading}
-            className="w-full text-white/40 hover:text-white text-sm py-2 transition-colors"
-          >
-            Оплатить картой
-          </button>
-
           <p className="text-white/30 text-xs text-center">
             Нажимая кнопку, вы соглашаетесь с{' '}
             <Link href="/offer" className="underline hover:text-white">

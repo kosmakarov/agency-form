@@ -102,7 +102,7 @@ export default function FoundersPayPage() {
 
           <p className="text-white/30 text-xs text-center">
             Нажимая кнопку, вы соглашаетесь с{' '}
-            <Link href="/offer" className="underline hover:text-white">
+            <Link href="/founders/offer" className="underline hover:text-white">
               договором оферты
             </Link>
           </p>

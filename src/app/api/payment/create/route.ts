@@ -12,7 +12,7 @@ const PRODUCTS: Record<string, {
   successPath: string
 }> = {
   consult: {
-    value: '15000.00',
+    value: '30000.00',
     description: 'Консультация по блогу (1.5 часа)',
     itemDescription: 'Консультация по развитию блога',
     successPath: '/consult/success',

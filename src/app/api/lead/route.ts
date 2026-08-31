@@ -6,11 +6,10 @@ interface LeadData {
   instagram: string
   business: string
   blogGoal: string
-  blogGoalOther: string
+  blogGoalOther?: string
   previousExperience: string
   blogBudget: string
   marketingBudget: string
-  threeMonths: string
   successMetric: string
 }
 
@@ -35,8 +34,6 @@ ${data.previousExperience}
 
 💰 Бюджет на блог: ${data.blogBudget}
 📊 Бюджет на маркетинг: ${data.marketingBudget}
-
-⏱ Готов работать 3+ месяцев: ${data.threeMonths === 'да' ? 'Да' : 'Нет'}
 
 🎯 Ожидаемый результат:
 ${data.successMetric}`
@@ -87,7 +84,7 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!data.name || !data.contact || !data.business || !data.blogGoal ||
         !data.previousExperience || !data.blogBudget || !data.marketingBudget ||
-        !data.threeMonths || !data.successMetric) {
+        !data.successMetric) {
       return NextResponse.json(
         { error: 'Пожалуйста, заполните все обязательные поля' },
         { status: 400 }

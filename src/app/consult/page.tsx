@@ -167,7 +167,7 @@ export default function ConsultPage() {
             </h1>
 
             <p className="text-lg text-white/60">
-              Один на один · 1.5 часа · онлайн
+              Один на один · 2.5 часа · онлайн
             </p>
           </div>
 
@@ -331,7 +331,7 @@ export default function ConsultPage() {
             </button>
 
             <h3 className="text-2xl font-semibold mb-2">Оплата консультации</h3>
-            <p className="text-white/40 text-sm mb-4">30 000 ₽ · 1.5 часа</p>
+            <p className="text-white/40 text-sm mb-4">30 000 ₽ · 2.5 часа</p>
 
             {/* VPN Warning */}
             <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 mb-6">

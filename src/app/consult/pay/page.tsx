@@ -47,7 +47,7 @@ export default function DirectPayPage() {
         <h1 className="text-2xl font-semibold mb-2">Блог под ключ за 3 дня</h1>
         <p className="text-white/40 text-sm mb-2">30 000 ₽</p>
         <p className="text-white/60 text-sm mb-6">
-          Разберёмся, зачем тебе блог. Уйдёшь с ясностью, темами и планом.
+          Стратегия блога под твою жизнь и бизнес. Первый ролик под ключ — со сценарием и монтажом.
         </p>
 
         {/* VPN Warning */}

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Консультация по блогу | Костя',
-  description: 'Персональная консультация по развитию блога. 2.5 часа один на один.',
+  title: 'Блог под ключ за 3 дня | Костя',
+  description: 'Блог под ключ за 3 дня. Личная работа один на один.',
 }
 
 export default function ConsultLayout({

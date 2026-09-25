@@ -13,8 +13,8 @@ const PRODUCTS: Record<string, {
 }> = {
   consult: {
     value: '30000.00',
-    description: 'Консультация по блогу (2.5 часа)',
-    itemDescription: 'Консультация по развитию блога',
+    description: 'Блог под ключ за 3 дня',
+    itemDescription: 'Блог под ключ за 3 дня',
     successPath: '/consult/success',
   },
   founders: {
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email обязателен для чека' }, { status: 400 })
     }
 
-    // Выбираем продукт (по умолчанию — консультация, для обратной совместимости)
+    // Выбираем продукт (по умолчанию — блог под ключ, для обратной совместимости)
     const productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
     const p = PRODUCTS[productKey]
 

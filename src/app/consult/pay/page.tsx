@@ -44,8 +44,8 @@ export default function DirectPayPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center p-4">
       <div className="bg-[#151515] border border-white/10 rounded-2xl p-6 sm:p-8 max-w-md w-full">
-        <h1 className="text-2xl font-semibold mb-2">Оплата консультации</h1>
-        <p className="text-white/40 text-sm mb-2">30 000 ₽ · 2.5 часа · онлайн</p>
+        <h1 className="text-2xl font-semibold mb-2">Блог под ключ за 3 дня</h1>
+        <p className="text-white/40 text-sm mb-2">30 000 ₽</p>
         <p className="text-white/60 text-sm mb-6">
           Разберёмся, зачем тебе блог. Уйдёшь с ясностью, темами и планом.
         </p>

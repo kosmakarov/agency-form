@@ -129,7 +129,7 @@ export default function ConsultPage() {
       onClick={() => setShowPaymentForm(true)}
       className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
     >
-      Записаться на консультацию — 30 000 ₽
+      Хочу блог под ключ — 30 000 ₽
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
@@ -159,16 +159,13 @@ export default function ConsultPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-5 py-2 rounded-full mb-6 tracking-widest uppercase">
-              Консультация
+              Блог под ключ
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-3">
-              Консультация по личному блогу
+              Блог под ключ за 3 дня
             </h1>
 
-            <p className="text-lg text-white/60">
-              Один на один · 2.5 часа · онлайн
-            </p>
           </div>
 
           {/* VSL Video - Main Focus */}
@@ -192,7 +189,7 @@ export default function ConsultPage() {
       <section className="py-20 px-6 bg-[#0d0d0d]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-3">
-            С чем приходят на консультацию
+            С чем ко мне приходят
           </h2>
           <p className="text-white/50 text-center mb-12">
             Вот реальные сообщения, которые мне пишут в директ перед тем, как записаться.
@@ -330,8 +327,8 @@ export default function ConsultPage() {
               </svg>
             </button>
 
-            <h3 className="text-2xl font-semibold mb-2">Оплата консультации</h3>
-            <p className="text-white/40 text-sm mb-4">30 000 ₽ · 2.5 часа</p>
+            <h3 className="text-2xl font-semibold mb-2">Блог под ключ за 3 дня</h3>
+            <p className="text-white/40 text-sm mb-4">30 000 ₽</p>
 
             {/* VPN Warning */}
             <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 mb-6">

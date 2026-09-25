@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Анкета предзаписи | Бутиковое агентство',
-  description: 'Заполните анкету для предварительной записи на консультацию',
+  description: 'Заполните анкету для предварительной записи',
 }
 
 export default function RootLayout({

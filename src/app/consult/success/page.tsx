@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Оплата прошла успешно | Костя',
-  description: 'Спасибо за оплату консультации',
+  description: 'Спасибо за оплату',
 }
 
 export default function PaymentSuccessPage() {
@@ -22,7 +22,7 @@ export default function PaymentSuccessPage() {
         </h1>
 
         <p className="text-cream/80 text-lg mb-8 leading-relaxed">
-          Спасибо! Я свяжусь с вами в течение дня, чтобы согласовать время консультации.
+          Спасибо! Я свяжусь с вами в течение дня, чтобы согласовать старт работы.
         </p>
 
         <p className="text-cream-muted text-sm mb-8">
@@ -33,7 +33,7 @@ export default function PaymentSuccessPage() {
           href="/consult"
           className="inline-block text-gold hover:text-gold-light transition-colors underline underline-offset-4"
         >
-          Вернуться на страницу консультации
+          Вернуться на страницу «Блог под ключ»
         </Link>
       </div>
     </main>

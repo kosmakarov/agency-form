@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { decodePayLink } from '@/lib/payLink'
 
 const YOOKASSA_SHOP_ID = process.env.YOOKASSA_SHOP_ID
 const YOOKASSA_SECRET_KEY = process.env.YOOKASSA_SECRET_KEY
@@ -34,15 +35,32 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { email, name, paymentMethod, product } = body
+    const { email, name, paymentMethod, product, link } = body
 
     if (!email) {
       return NextResponse.json({ error: 'Email обязателен для чека' }, { status: 400 })
     }
 
-    // Выбираем продукт (по умолчанию — блог под ключ, для обратной совместимости)
-    const productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
-    const p = PRODUCTS[productKey]
+    // Ссылка с подписанной суммой (/pay?t=...) или продукт из каталога
+    let productKey: string
+    let p: (typeof PRODUCTS)[string]
+    if (link !== undefined) {
+      const custom = decodePayLink(link)
+      if (!custom) {
+        return NextResponse.json({ error: 'Ссылка на оплату недействительна' }, { status: 400 })
+      }
+      productKey = 'link'
+      p = {
+        value: custom.amount.toFixed(2),
+        description: custom.description,
+        itemDescription: custom.description,
+        successPath: '/consult/success',
+      }
+    } else {
+      // Выбираем продукт (по умолчанию — блог под ключ, для обратной совместимости)
+      productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
+      p = PRODUCTS[productKey]
+    }
 
     console.log('Creating payment for:', email, 'method:', paymentMethod, 'product:', productKey)
 

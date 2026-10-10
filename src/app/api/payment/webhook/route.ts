@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         consult: 'Блог под ключ за 3 дня',
         founders: 'Сериал Основателя',
       }
-      const productName = productNames[metadata.product] || 'Блог под ключ за 3 дня'
+      const productName = productNames[metadata.product] || payment.description || 'Блог под ключ за 3 дня'
 
       const message = `
 💰 <b>Новая оплата: ${productName}</b>

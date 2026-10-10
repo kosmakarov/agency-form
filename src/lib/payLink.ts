@@ -2,15 +2,15 @@ import { createHash, createHmac, timingSafeEqual } from 'crypto'
 
 // Ссылки на оплату с любой суммой: /pay?t=<payload>.<sig>
 // payload — base64url от {"a": сумма, "d": "название услуги"},
-// sig — HMAC-SHA256. Ключ выводится из секрета ЮKassa, отдельная переменная не нужна.
-// Ссылки делает агент на сервере скриптом scripts/pay-link.mjs.
+// sig — HMAC-SHA256 с ключом PAY_LINK_SECRET (тот же ключ у агента на сервере).
+// Ссылки делает агент скриптом scripts/pay-link.mjs.
 
 export type PayLink = { amount: number; description: string }
 
 function linkKey(): Buffer | null {
-  const secret = process.env.YOOKASSA_SECRET_KEY
+  const secret = process.env.PAY_LINK_SECRET?.trim()
   if (!secret) return null
-  return createHash('sha256').update('pay-link:' + secret).digest()
+  return createHash('sha256').update(secret).digest()
 }
 
 export function decodePayLink(token: unknown): PayLink | null {

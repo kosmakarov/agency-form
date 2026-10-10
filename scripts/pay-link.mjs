@@ -1,6 +1,6 @@
 // Ссылка на оплату с любой суммой.
 // node scripts/pay-link.mjs 25000 "Сопровождение по контент-маркетингу"
-// Ключ: PAY_LINK_KEY (hex) или выводится из YOOKASSA_SECRET_KEY, как в src/lib/payLink.ts
+// Ключ: PAY_LINK_SECRET, тот же, что на Vercel
 import { createHash, createHmac } from 'crypto'
 
 const [amountArg, ...descParts] = process.argv.slice(2)
@@ -11,13 +11,10 @@ if (!Number.isFinite(amount) || amount <= 0 || !description) {
   process.exit(1)
 }
 
-const key = process.env.PAY_LINK_KEY
-  ? Buffer.from(process.env.PAY_LINK_KEY, 'hex')
-  : process.env.YOOKASSA_SECRET_KEY
-    ? createHash('sha256').update('pay-link:' + process.env.YOOKASSA_SECRET_KEY).digest()
-    : null
+const secret = process.env.PAY_LINK_SECRET?.trim()
+const key = secret ? createHash('sha256').update(secret).digest() : null
 if (!key) {
-  console.error('Нет PAY_LINK_KEY')
+  console.error('Нет PAY_LINK_SECRET')
   process.exit(1)
 }
 

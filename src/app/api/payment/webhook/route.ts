@@ -31,10 +31,10 @@ export async function POST(request: Request) {
       const metadata = payment.metadata || {}
 
       const productNames: Record<string, string> = {
-        consult: 'Блог под ключ за 3 дня',
+        consult: 'Консультация по блогу',
         founders: 'Сериал Основателя',
       }
-      const productName = productNames[metadata.product] || payment.description || 'Блог под ключ за 3 дня'
+      const productName = productNames[metadata.product] || payment.description || 'Консультация по блогу'
 
       const message = `
 💰 <b>Новая оплата: ${productName}</b>

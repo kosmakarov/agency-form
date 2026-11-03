@@ -13,9 +13,9 @@ const PRODUCTS: Record<string, {
   successPath: string
 }> = {
   consult: {
-    value: '30000.00',
-    description: 'Блог под ключ за 3 дня',
-    itemDescription: 'Блог под ключ за 3 дня',
+    value: '15000.00',
+    description: 'Консультация по блогу (1.5 часа)',
+    itemDescription: 'Консультация по развитию блога',
     successPath: '/consult/success',
   },
   founders: {
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
         successPath: '/consult/success',
       }
     } else {
-      // Выбираем продукт (по умолчанию — блог под ключ, для обратной совместимости)
+      // Выбираем продукт (по умолчанию — консультация, для обратной совместимости)
       productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
       p = PRODUCTS[productKey]
     }

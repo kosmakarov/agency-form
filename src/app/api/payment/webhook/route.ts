@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { PRODUCTS } from '@/lib/products'
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID
@@ -30,11 +31,8 @@ export async function POST(request: Request) {
       const payment = body.object
       const metadata = payment.metadata || {}
 
-      const productNames: Record<string, string> = {
-        consult: 'Консультация по блогу',
-        founders: 'Сериал Основателя',
-      }
-      const productName = productNames[metadata.product] || payment.description || 'Консультация по блогу'
+      const productName =
+        PRODUCTS[metadata.product]?.notifyName || payment.description || 'Оплата'
 
       const message = `
 💰 <b>Новая оплата: ${productName}</b>

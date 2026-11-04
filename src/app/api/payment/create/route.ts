@@ -1,30 +1,12 @@
 import { NextResponse } from 'next/server'
 import { decodePayLink } from '@/lib/payLink'
+import { PRODUCTS, DEFAULT_PRODUCT, type Product } from '@/lib/products'
+
+// Что нужно для создания платежа. Полные данные услуги — в @/lib/products.
+type PaymentSpec = Pick<Product, 'value' | 'description' | 'itemDescription' | 'successPath'>
 
 const YOOKASSA_SHOP_ID = process.env.YOOKASSA_SHOP_ID
 const YOOKASSA_SECRET_KEY = process.env.YOOKASSA_SECRET_KEY
-
-// Каталог продуктов. Цена берётся ТОЛЬКО отсюда по ключу продукта —
-// клиент не может подменить сумму, передаёт лишь ключ.
-const PRODUCTS: Record<string, {
-  value: string
-  description: string
-  itemDescription: string
-  successPath: string
-}> = {
-  consult: {
-    value: '15000.00',
-    description: 'Консультация по блогу (1.5 часа)',
-    itemDescription: 'Консультация по развитию блога',
-    successPath: '/consult/success',
-  },
-  founders: {
-    value: '69900.00',
-    description: 'Сериал Основателя — личное сопровождение по внедрению блога',
-    itemDescription: 'Сериал Основателя (личное сопровождение)',
-    successPath: '/founders/success',
-  },
-}
 
 export async function POST(request: Request) {
   try {
@@ -43,7 +25,7 @@ export async function POST(request: Request) {
 
     // Ссылка с подписанной суммой (/pay?t=...) или продукт из каталога
     let productKey: string
-    let p: (typeof PRODUCTS)[string]
+    let p: PaymentSpec
     if (link !== undefined) {
       const custom = decodePayLink(link)
       if (!custom) {
@@ -58,7 +40,7 @@ export async function POST(request: Request) {
       }
     } else {
       // Выбираем продукт (по умолчанию — консультация, для обратной совместимости)
-      productKey = typeof product === 'string' && PRODUCTS[product] ? product : 'consult'
+      productKey = typeof product === 'string' && PRODUCTS[product] ? product : DEFAULT_PRODUCT
       p = PRODUCTS[productKey]
     }
 

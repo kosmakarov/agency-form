@@ -2,6 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { PRODUCTS, formatPrice, metaLine } from '@/lib/products'
+
+const consult = PRODUCTS.consult
+const consultPrice = formatPrice(consult.value)
+const consultMeta = metaLine(consult)
 
 const quotes = [
   {
@@ -129,7 +134,7 @@ export default function ConsultPage() {
       onClick={() => setShowPaymentForm(true)}
       className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(196,163,90,0.3)]"
     >
-      Записаться на консультацию — 15 000 ₽
+      Записаться на консультацию — {consultPrice}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
@@ -167,7 +172,7 @@ export default function ConsultPage() {
             </h1>
 
             <p className="text-lg text-white/60">
-              Один на один · 1.5 часа · онлайн
+              Один на один · {consultMeta}
             </p>
           </div>
 
@@ -312,7 +317,7 @@ export default function ConsultPage() {
           onClick={() => setShowPaymentForm(true)}
           className="block w-full bg-gold hover:bg-gold-light text-[#0a0a0a] font-semibold py-4 rounded-lg text-center transition-colors duration-200"
         >
-          Записаться · 15 000 ₽
+          Записаться · {consultPrice}
         </button>
       </div>
 
@@ -331,7 +336,7 @@ export default function ConsultPage() {
             </button>
 
             <h3 className="text-2xl font-semibold mb-2">Оплата консультации</h3>
-            <p className="text-white/40 text-sm mb-4">15 000 ₽ · 1.5 часа</p>
+            <p className="text-white/40 text-sm mb-4">{consultPrice} · {consult.duration}</p>
 
             {/* VPN Warning */}
             <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 mb-6">
